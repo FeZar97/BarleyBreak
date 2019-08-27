@@ -21,7 +21,7 @@ public:
     bool checkOrder();
 
 signals:
-    void printMatrix(QVector<int> rndVector, int dim);
+    void printMatrix(QVector<int> rndVec, int dim);
 
 public slots:
     void fillMatrix(int _dimenshion);
