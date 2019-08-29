@@ -4,5 +4,6 @@
         <file>qtquickcontrols2.conf</file>
         <file>GameMenu.qml</file>
         <file>GameField.qml</file>
+        <file>Cell.qml</file>
     </qresource>
 </RCC>

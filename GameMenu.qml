@@ -4,7 +4,12 @@ import QtQuick.Controls 2.12
 
 RowLayout {
     id: settingsPanel
-    height: 40
+    //anchors.fill: parent
+
+    //Rectangle {
+    //    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+    //    color: "#ff8282" // lightred
+    //}
 
     Label {
         id: dimenshionTXT
@@ -16,11 +21,12 @@ RowLayout {
         from: 2
         to: 9
         value: 3
+        Layout.fillWidth: true
     }
 
     Button {
         id: startButton
-        text: qsTr("Start game")
+        text: qsTr("Test")
         onClicked: AppCore.fillMatrix(dimenshionSB.value)
     }
 }
