@@ -1,41 +1,27 @@
 import QtQuick 2.0
 
-Item {
-    id: myCell
+MouseArea {
 
-    property string cellText: qsTr("cell text")
-    property int cellWidth: 50
-    property int cellHeight: 50
+    id: cell
+
+    property var display: 1
+    property var uid: 1
 
     Rectangle {
-        id: rect
-
-        width: cellWidth - 4
-        height: cellHeight - 4
-
-        color: "yellow"
-        border.color: "red"
+        anchors.fill: parent
+        color: "#80ff80"
+        border.color: "#ff8080"
         border.width: 2
+        visible: display == -1 ? false : true
 
         Text {
             anchors.centerIn: parent
-            text: "parent.cellText"
+            text: display == -1 ? qsTr("") : qsTr(display.toString())
+            font.pixelSize: 50
         }
     }
 
-    MouseArea {
-        id: cellArea
-
-        anchors.fill: rect
-        // hoverEnabled: true
-        // preventStealing : true
-        // property int index: mainGrid.indexAt(mouseX, mouseY) //item underneath cursor
-        // property int activeId: -1 //uid of active item
-        // property int activeIndex //current position of active item
-
-        onPressed: {
-            // activeId = mainGrid.model.get(activeIndex=index).uid
-            console.log(rect.cellText)
-        }
+    onClicked: {
+        console.log("id " + uid.toString() + ", val " + display.toString())
     }
 }

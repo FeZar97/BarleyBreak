@@ -4,12 +4,6 @@ import QtQuick.Controls 2.12
 
 RowLayout {
     id: settingsPanel
-    //anchors.fill: parent
-
-    //Rectangle {
-    //    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-    //    color: "#ff8282" // lightred
-    //}
 
     Label {
         id: dimenshionTXT

@@ -4,60 +4,82 @@ import QtQuick.Controls 2.12
 
 RowLayout {
     id: parentItem
-    //anchors.fill: parent
 
-    //Rectangle {
-    //    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-    //    color: "lightgreen"
-    //}
+    property var dimenshion: 3
+    property var rndVector: [1,2,3,4,5,6,7,8,9]
 
     function createModel() {
-        console.log("createModel(): ")
-        // for (var i = 0; i < dimenshion * dimenshion; i++) {
-        //     myModel.append({"display": rndVector[i], "uid": i})
-        //     console.log("createModel(): ", myModel.modelData)
-        // }
-    }
-
-    ColumnLayout {
-        Layout.fillWidth: true
-        Repeater {
-            id: rowRepeater
-            model: dimenshion
-
-            RowLayout {
-                Layout.fillWidth: true
-
-                Rectangle {
-                    id: rect
-
-                    width: parent.width - 4
-                    height: parent.height - 4
-
-                    color: "#80ff80"
-                    border.color: "red"
-                    border.width: 2
-
-                    Text {
-                        anchors.centerIn: parent
-                        text: index
-                    }
-                }
-
-                //Repeater {
-                //    model: dimenshion
-                //
-                //    Cell {
-                //        width: parentItem.width/dimenshion
-                //        height: parentItem.height/dimenshion
-                //    }
-                //}
-            }
+        myModel.clear()
+        for (var i = 0; i < dimenshion * dimenshion; i++) {
+            myModel.append( {"display": rndVector[i], "uid": i} )
+            //console.log("element " + myModel.get(i).uid + " " + myModel.get(i).display)
         }
-        onHeightChanged: console.log("gameField::height", height)
     }
 
-    onWidthChanged: console.log("mainGameField::width", width)
+    ListModel {
+        id: myModel
+    }
+
+    GridLayout {
+        id: gridLayout
+
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+
+        rowSpacing: 5
+        columnSpacing: 5
+
+        rows: dimenshion
+        columns: dimenshion
+
+        Repeater {
+
+            model: myModel
+
+            delegate: Cell { Layout.fillWidth: true; Layout.fillHeight: true; display: model.display; uid: model.uid}
+        }
+    }
+        //onWidthChanged: console.log("gridLayout::width", gridLayout.height/dimenshion)
+        //onHeightChanged: console.log("gridLayout::height", gridLayout.height/dimenshion)
+
+    // ColumnLayout {
+    //     Repeater {
+    //         id: rowRepeater
+    //         model: dimenshion
+    //
+    //         RowLayout {
+    //             id: rowComponent
+    //             Layout.fillWidth: true
+    //             property int idx: index
+    //
+    //             Repeater {
+    //                 id: columnRepeater
+    //                 model: dimenshion
+    //
+    //                 //Cell {}
+    //                 Rectangle {
+    //                     id: rect
+    //
+    //                     height: parent.height - 4
+    //                     width: height
+    //
+    //                     color: "#80ff80"
+    //                     border.color: "red"
+    //                     border.width: 2
+    //
+    //                     Text {
+    //                         anchors.centerIn: parent
+    //                         text: rowComponent.idx + " " + index
+    //                     }
+    //
+    //                     Component.onCompleted: console.log(rowComponent.idx + " " + index)
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     //onHeightChanged: console.log("gameField::height", height)
+    // }
+    //
 
 /*
     // id: parentItem

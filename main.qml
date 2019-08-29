@@ -11,8 +11,6 @@ Window {
     height: 480
 
     property int margin: 11
-    property int dimenshion: 3
-    property var rndVector: [1,2,3,4,5,6,7,8,9]
 
     //Rectangle {
     //    color: "#8080ff" // blue
@@ -22,8 +20,8 @@ Window {
     Connections {
         target: AppCore
         onPrintMatrix: {
-            dimenshion = dim
-            rndVector = rndVec
+            gameField.dimenshion = dim
+            gameField.rndVector = rndVec
             gameField.createModel()
         }
     }
