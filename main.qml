@@ -10,40 +10,36 @@ Window {
     width: 640
     height: 480
 
-    property int margin: 11
-
-    //Rectangle {
-    //    color: "#8080ff" // blue
-    //    anchors.fill: parent
-    //}
-
     Connections {
         target: AppCore
         onPrintMatrix: {
             gameField.dimenshion = dim
             gameField.rndVector = rndVec
-            gameField.createModel()
+            gameField.appendModel()
         }
     }
 
     ColumnLayout {
         id: mainLayout
         anchors.fill: parent
-        anchors.margins: margin
 
         Rectangle {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             color: "#ffff80" // yellow
         }
 
-        GameMenu { id: gameModel; Layout.fillWidth: true }
+        GameMenu { id: gameMenu; Layout.fillWidth: true }
 
         GameField { id: gameField; Layout.fillWidth: true }
 
-        //onWidthChanged: console.log("mainLayout::width", width)
-        //onHeightChanged: console.log("mainLayout::height", height)
+        focus: true
+        Keys.onPressed: {
+            if (event.key == Qt.Key_Up) AppCore.upPressed()
+            if (event.key == Qt.Key_Down) AppCore.downPressed()
+            if (event.key == Qt.Key_Right) AppCore.rightPressed()
+            if (event.key == Qt.Key_Left) AppCore.leftPressed()
+        }
     }
 
-    //onWidthChanged: console.log("window::width", width)
-    //onHeightChanged: console.log("window::height", height)
+    Component.onCompleted: AppCore.fillMatrix(gameMenu.dimenshion)
 }

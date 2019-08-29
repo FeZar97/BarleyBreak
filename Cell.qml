@@ -21,7 +21,5 @@ MouseArea {
         }
     }
 
-    onClicked: {
-        console.log("id " + uid.toString() + ", val " + display.toString())
-    }
+    onClicked: AppCore.clickOn(uid)
 }

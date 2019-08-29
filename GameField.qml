@@ -8,11 +8,10 @@ RowLayout {
     property var dimenshion: 3
     property var rndVector: [1,2,3,4,5,6,7,8,9]
 
-    function createModel() {
+    function appendModel() {
         myModel.clear()
         for (var i = 0; i < dimenshion * dimenshion; i++) {
             myModel.append( {"display": rndVector[i], "uid": i} )
-            //console.log("element " + myModel.get(i).uid + " " + myModel.get(i).display)
         }
     }
 
@@ -39,47 +38,6 @@ RowLayout {
             delegate: Cell { Layout.fillWidth: true; Layout.fillHeight: true; display: model.display; uid: model.uid}
         }
     }
-        //onWidthChanged: console.log("gridLayout::width", gridLayout.height/dimenshion)
-        //onHeightChanged: console.log("gridLayout::height", gridLayout.height/dimenshion)
-
-    // ColumnLayout {
-    //     Repeater {
-    //         id: rowRepeater
-    //         model: dimenshion
-    //
-    //         RowLayout {
-    //             id: rowComponent
-    //             Layout.fillWidth: true
-    //             property int idx: index
-    //
-    //             Repeater {
-    //                 id: columnRepeater
-    //                 model: dimenshion
-    //
-    //                 //Cell {}
-    //                 Rectangle {
-    //                     id: rect
-    //
-    //                     height: parent.height - 4
-    //                     width: height
-    //
-    //                     color: "#80ff80"
-    //                     border.color: "red"
-    //                     border.width: 2
-    //
-    //                     Text {
-    //                         anchors.centerIn: parent
-    //                         text: rowComponent.idx + " " + index
-    //                     }
-    //
-    //                     Component.onCompleted: console.log(rowComponent.idx + " " + index)
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     //onHeightChanged: console.log("gameField::height", height)
-    // }
-    //
 
 /*
     // id: parentItem

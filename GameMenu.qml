@@ -5,6 +5,8 @@ import QtQuick.Controls 2.12
 RowLayout {
     id: settingsPanel
 
+    property var dimenshion: dimenshionSB.value
+
     Label {
         id: dimenshionTXT
         text: qsTr("Field dimenshion:")

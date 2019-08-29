@@ -15,6 +15,9 @@ private:
     Q_INVOKABLE QVector<int> rndVector;
     bool isComplete;
 
+    void swapWithNull(int neighbourIdx);
+    bool isNeighbourNullCell(int cellIdx);
+
 public:
     explicit AppCore(QObject *parent = nullptr);
 
@@ -25,6 +28,13 @@ signals:
 
 public slots:
     void fillMatrix(int _dimenshion);
+
+    void upPressed();
+    void downPressed();
+    void rightPressed();
+    void leftPressed();
+
+    void clickOn(int idx);
 };
 
 #endif // APPCORE_H
