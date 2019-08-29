@@ -84,10 +84,10 @@ void AppCore::leftPressed()
 void AppCore::clickOn(int idx)
 {
     if(isNeighbourNullCell(idx)) {
-        qDebug() << "cell " << rndVector[idx] << " is movable";
+        qDebug() << "add move animation";
         swapWithNull(idx);
         emit printMatrix(rndVector, dimenshion);
     } else {
-        qDebug() << "cell " << rndVector[idx] << " hasn't neighbour -1";
+        qDebug() << "add gradient animation from red to green";
     }
 }
