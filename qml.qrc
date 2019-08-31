@@ -5,5 +5,6 @@
         <file>GameMenu.qml</file>
         <file>GameField.qml</file>
         <file>Cell.qml</file>
+        <file>WinWindow.qml</file>
     </qresource>
 </RCC>

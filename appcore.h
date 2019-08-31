@@ -17,6 +17,7 @@ private:
 
     void swapWithNull(int neighbourIdx);
     bool isNeighbourNullCell(int cellIdx);
+    void checkField();
 
 public:
     explicit AppCore(QObject *parent = nullptr);
@@ -25,6 +26,7 @@ public:
 
 signals:
     void printMatrix(QVector<int> rndVec, int dim);
+    void showWinWindow();
 
 public slots:
     void fillMatrix(int _dimenshion);

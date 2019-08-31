@@ -12,10 +12,11 @@ void AppCore::swapWithNull(int idxOfNeighbour) {
 
     rndVector[neighbourCell.first] = -1;
     rndVector[nullCell.first] = neighbourCell.second;
+
+    checkField();
 }
 
-bool AppCore::isNeighbourNullCell(int cellIdx)
-{
+bool AppCore::isNeighbourNullCell(int cellIdx) {
     return (
            (( (cellIdx    ) % dimenshion > 0 )        ? ( rndVector[cellIdx - 1] == -1 )          : false)// left side
             or
@@ -24,7 +25,20 @@ bool AppCore::isNeighbourNullCell(int cellIdx)
            ((cellIdx >= dimenshion)                    ? ( rndVector[cellIdx - dimenshion] == -1 ) : false) // top side
             or
            ((cellIdx < dimenshion * (dimenshion - 1)) ? ( rndVector[cellIdx + dimenshion] == -1 ) : false) // bot side
-           );
+          );
+}
+
+void AppCore::checkField() {
+
+    bool res = true;
+    for(int i = 0; i < rndVector.size() - 2; i++) {
+        if(rndVector[i] > rndVector[i + 1]) {
+            res = false;
+            break;
+        }
+    }
+    if(res)
+        emit showWinWindow();
 }
 
 void AppCore::fillMatrix(int _dimenshion) {

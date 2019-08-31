@@ -13,6 +13,7 @@ MouseArea {
         border.color: "#ff8080"
         border.width: 2
         visible: display == -1 ? false : true
+        radius: 10
 
         Text {
             anchors.centerIn: parent

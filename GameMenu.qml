@@ -3,7 +3,9 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 
 RowLayout {
-    id: settingsPanel
+    id: mainLayout
+    Layout.fillWidth: true
+    Layout.margins: 15
 
     property var dimenshion: dimenshionSB.value
 
@@ -14,10 +16,9 @@ RowLayout {
 
     SpinBox {
         id: dimenshionSB
-        from: 2
-        to: 9
-        value: 3
         Layout.fillWidth: true
+        from: 2; to: 9
+        value: 3
     }
 
     Button {
