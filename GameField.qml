@@ -10,6 +10,8 @@ RowLayout {
     property var dimenshion: 3
     property var trueVector: [1,2,3,4,5,6,7,8,-1]
 
+    signal win()
+
     function isContained(list, value) {
         for(var i = 0; i < list.length; i++)
             if(list[i] === value)
@@ -59,6 +61,8 @@ RowLayout {
                 myModel.move(cellIdx + dimenshion - 1, cellIdx, 1)
             }
         }
+
+        checkField()
     }
 
     function createRandomField(newDimenshion) {
@@ -83,10 +87,47 @@ RowLayout {
         randVector.push(-1)
 
         myModel.move(findCellIdx(myModel, randVector[0]), 0, 1)
-        // for(i = 0; i < myModel.count; i++) {
-        //     console.log("move " + findCellIdx(myModel, randVector[i]) + " to " + i)
-        //     myModel.move(findCellIdx(myModel, randVector[i]), i, 1)
-        // }
+    }
+
+    function upPressed() {
+        // if nullCell in last row, then break
+        if(findCellIdx(myModel, -1) < dimenshion * (dimenshion - 1)) {
+            swapWithNull(myModel.get(findCellIdx(myModel, -1) + dimenshion).display)
+        }
+        checkField()
+    }
+
+    function downPressed() {
+        // if nullCell in first row, then break
+        if(findCellIdx(myModel, -1) >= dimenshion) {
+            swapWithNull(myModel.get(findCellIdx(myModel, -1) - dimenshion).display)
+        }
+        checkField()
+    }
+
+    function rightPressed() {
+        // if nullCell in left column, then break
+        if(findCellIdx(myModel, -1) % dimenshion != 0) {
+            swapWithNull(myModel.get(findCellIdx(myModel, -1) - 1).display)
+        }
+        checkField()
+    }
+
+    function leftPressed() {
+        // if nullCell in right column, then break
+        if((findCellIdx(myModel, -1) + 1) % dimenshion != 0) {
+            swapWithNull(myModel.get(findCellIdx(myModel, -1) + 1).display)
+        }
+        checkField()
+    }
+
+    function checkField() {
+        var flag = true
+        for(var i = 0; i < myModel.count - 2; i++)
+            if(myModel.get(i).display > myModel.get(i + 1).display)
+                flag = false
+        if(flag)
+            win()
     }
 
     Rectangle {

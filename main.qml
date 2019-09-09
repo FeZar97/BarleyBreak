@@ -12,29 +12,27 @@ Window {
 
     property var winWinow: WinWindow {}
 
-    Connections {
-        target: AppCore
-
-        onShowWinWindow: {
-            winWinow.visible = true
-        }
-    }
-
     ColumnLayout {
         anchors.fill: parent
 
-        GameMenu { id: menu ; onButtonClicked: field.createRandomField(menu.dimenshion)}
+        GameMenu {
+            id: menu;
+            onButtonClicked: field.createRandomField(menu.dimenshion)
+        }
 
-        GameField { id: field }
+        GameField {
+            id: field
+            onWin: winWinow.visible = true
+        }
 
         focus: true
         Keys.onPressed: {
-            if (event.key === Qt.Key_Up)       AppCore.upPressed()
-            if (event.key === Qt.Key_Down)     AppCore.downPressed()
-            if (event.key === Qt.Key_Right)    AppCore.rightPressed()
-            if (event.key === Qt.Key_Left)     AppCore.leftPressed()
+            if (event.key === Qt.Key_Up)    field.upPressed()
+            if (event.key === Qt.Key_Down)  field.downPressed()
+            if (event.key === Qt.Key_Right) field.rightPressed()
+            if (event.key === Qt.Key_Left)  field.leftPressed()
         }
     }
 
-    Component.onCompleted: field.createRandomField(menu.dimenshion) //AppCore.fillMatrix(menu.dimenshion)
+    Component.onCompleted: field.createRandomField(menu.dimenshion)
 }
