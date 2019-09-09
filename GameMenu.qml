@@ -9,6 +9,8 @@ RowLayout {
 
     property var dimenshion: dimenshionSB.value
 
+    signal buttonClicked()
+
     Label {
         id: dimenshionTXT
         text: qsTr("Field dimenshion:")
@@ -24,6 +26,6 @@ RowLayout {
     Button {
         id: startButton
         text: qsTr("Test")
-        onClicked: AppCore.fillMatrix(dimenshionSB.value)
+        onClicked: buttonClicked()
     }
 }

@@ -15,12 +15,6 @@ Window {
     Connections {
         target: AppCore
 
-        onPrintMatrix: {
-            field.dimenshion = dim
-            field.rndVector = rndVec
-            field.appendModel()
-        }
-
         onShowWinWindow: {
             winWinow.visible = true
         }
@@ -29,17 +23,18 @@ Window {
     ColumnLayout {
         anchors.fill: parent
 
-        GameMenu { id: menu }
+        GameMenu { id: menu ; onButtonClicked: field.createRandomField(menu.dimenshion)}
+
         GameField { id: field }
 
         focus: true
         Keys.onPressed: {
-            if (event.key === Qt.Key_Up)    AppCore.upPressed()
-            if (event.key === Qt.Key_Down)  AppCore.downPressed()
-            if (event.key === Qt.Key_Right) AppCore.rightPressed()
-            if (event.key === Qt.Key_Left)  AppCore.leftPressed()
+            if (event.key === Qt.Key_Up)       AppCore.upPressed()
+            if (event.key === Qt.Key_Down)     AppCore.downPressed()
+            if (event.key === Qt.Key_Right)    AppCore.rightPressed()
+            if (event.key === Qt.Key_Left)     AppCore.leftPressed()
         }
     }
 
-    Component.onCompleted: AppCore.fillMatrix(menu.dimenshion)
+    Component.onCompleted: field.createRandomField(menu.dimenshion) //AppCore.fillMatrix(menu.dimenshion)
 }

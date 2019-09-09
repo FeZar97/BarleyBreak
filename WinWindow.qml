@@ -8,7 +8,7 @@ Window {
     visible: false
     width: window.width
     height: window.height
-    transientParent: parent
+    //transientParent: parent
     title: qsTr("Congratulations!")
     modality: Qt.WindowModal
     color: "transparent"
@@ -19,12 +19,13 @@ Window {
 
         ColumnLayout {
             anchors.fill: parent
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+            // Layout.fillWidth: true
+            // Layout.fillHeight: true
 
             Text {
                 text: qsTr("You win!")
-                anchors.centerIn: parent
+                //anchors.centerIn: parent
+                Layout.alignment: Qt.AlignVCenter
                 font.pixelSize: 50
             }
 

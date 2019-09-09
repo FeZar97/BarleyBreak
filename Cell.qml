@@ -5,7 +5,15 @@ MouseArea {
     id: cell
 
     property var display: 1
-    property var uid: 1
+
+    function moveTo(direction) {
+        switch(direction){
+            case "top":   cell.state = 'topState';   break;
+            case "bot":   cell.state = 'botState';   break;
+            case "left":  cell.state = 'leftState';  break;
+            case "right": cell.state = 'rightState'; break;
+        }
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -13,7 +21,9 @@ MouseArea {
         border.color: "#ff8080"
         border.width: 2
         visible: display == -1 ? false : true
+        z: display == -1 ? 0 : 1
         radius: 10
+        anchors.margins: 5
 
         Text {
             anchors.centerIn: parent
@@ -22,5 +32,35 @@ MouseArea {
         }
     }
 
-    onClicked: AppCore.clickOn(uid)
+    states: [
+        State {
+            name: "topState"
+            PropertyChanges { target: cell; y: cell.y - cell.height }
+        },
+
+        State {
+            name: "botState"
+            PropertyChanges { target: cell; y: cell.y + cell.height  }
+        },
+
+        State {
+            name: "leftState"
+            PropertyChanges { target: cell; x: cell.x - cell.width  }
+        },
+
+        State {
+            name: "rightState"
+            PropertyChanges { target: cell; x: cell.x + cell.width  }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            from: "*"; to: "*"
+            NumberAnimation { properties: "x,y"; easing.type: Easing.InOutQuad; duration: 1000 }
+        }
+    ]
+
+    //onClicked: AppCore.clickOn(uid)
+    //onClicked: moveTo("left")
 }
