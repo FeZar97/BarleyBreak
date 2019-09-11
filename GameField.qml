@@ -6,6 +6,7 @@ RowLayout {
     id: mainLayout
     Layout.fillWidth: true
     Layout.margins: 15
+    clip: false
 
     property var dimenshion: 3
     property var trueVector: [1,2,3,4,5,6,7,8,-1]
@@ -145,8 +146,6 @@ RowLayout {
 
             anchors.fill: parent
 
-            model: myModel
-
             cellWidth: parent.width / dimenshion
             cellHeight: parent.height / dimenshion
 
@@ -161,11 +160,24 @@ RowLayout {
                 NumberAnimation { properties: "x,y"; duration: 300 }
             }
             populate: Transition {
-                NumberAnimation { properties: "x,y"; duration: 1000 }
+                id: _popuTrans
+                SequentialAnimation {
+                    PropertyAction { property: "opacity"; value: 0.0 }
+                    PauseAnimation { duration: 100*_popuTrans.ViewTransition.index }
+                    NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 300; easing.type: Easing.InOutQuad }
+                }
             }
             displaced: Transition {
                 NumberAnimation { properties: "x,y"; duration: 1000 }
             }
+
+            Component.onCompleted: {
+                model = myModel
+            }
+
+            Behavior on createRandomField() {
+                    NumberAnimation { duration: 1000 }
+                }
         }
     }
 }
